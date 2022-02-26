@@ -261,7 +261,15 @@ try {
           switch(nextFunction){
             case 'c1': category1(return_cate1); break;
             case 'c2': category2(category_value, category2_value); break;
-          }
+                      }
+        }
+        ).then(function() {
+            ui.action.text({
+                action: {
+                    placeholder: '名前を入力してください'
+                    }
+                    }
+                    )
         });
       }
 
