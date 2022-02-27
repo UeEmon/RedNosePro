@@ -18,41 +18,54 @@ if (is_uploaded_file($_FILES["csvfile"]["tmp_name"])) {
       $file = '../../tmp/uploaded/'.$file_name;
       $fp   = fopen($file, "r");
 
+      //DB接続情報
+      $pdo = new PDO('sqlite:./botdb.db');
+      // SQL実行時にもエラーの代わりに例外を投げるように設定
+         
+     $sql ="SELECT * FROM content";
+     $stmt = $pdo->query( $sql );
+ 
+    
+     
+      $edit = "";
+      
+      
+      while( $data = $stmt->fetch( PDO::FETCH_ASSOC ) ) {
+            $edit .= "{$data['']},{$data['']},{$data['']},{$data['']},{$data['']}\n";
+        }
+        
+		print_r($edit);
+       // fwrite($fp, $edit);
+
+/*
+
+
+
+
       //配列に変換する
       while (($data = fgetcsv($fp, 0, ",")) !== FALSE) {
         $asins[] = $data;
       }
-
+*/
       fclose($fp);
       //ファイルの削除
-      unlink('../../tmp/uploaded/'.$file_name);
+      //unlink('../../tmp/uploaded/'.$file_name);
       
-      print_r($asins);
+  //    print_r($asins);
       
-      //DB接続情報
-    $pdo = new PDO('sqlite:./botdb.db');
-
-    // SQL実行時にもエラーの代わりに例外を投げるように設定
-    // (毎回if文を書く必要がなくなる)
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    // デフォルトのフェッチモードを連想配列形式に設定 
-    // (毎回PDO::FETCH_ASSOCを指定する必要が無くなる)
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);    
-   
-   
+      /*
     $arrayValues = "";
     foreach ($asins as $asin) {
         $arrayValues[] = "('{$asain}',)";
     }
-    
+    */
    // print_r($arrayValues);
     
     //prepareによる実行準備
-    //$sql="INSERT INTO content (0,1,2,3,4) VALUES ;
+//    $sql="INSERT INTO content (value,cat_1,cat_2,question,answer) VALUES " .join(",",$asins );
     
     //print_r($sql);
-    $stmt=$pdo->prepare("insert into content values(:asain)");
+    //$stmt=$pdo->prepare($sql);
     
     //foreach($asins as $asin){
     //    $stmt->excute($asin);
