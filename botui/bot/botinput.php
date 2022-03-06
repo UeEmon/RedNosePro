@@ -124,7 +124,7 @@ try {
             }
         });
       }
-
+    
       //第二カテゴリ及び第二カテゴリがないquestionを表示する関数
       function category1(i){
 
