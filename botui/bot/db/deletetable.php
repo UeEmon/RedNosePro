@@ -23,4 +23,6 @@
         question TEXT,
         answer TEXT
     )");
-
+    
+    //dbcontrolに戻る
+    header('Location: ./dbcontrol.php');

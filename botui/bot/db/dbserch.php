@@ -2,52 +2,14 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8">
-    <title>DBコントロール</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- link rel="stylesheet" href="../css/botui-theme-default.css" / -->
-    <!-- link rel="stylesheet" href="../css/botui.min.css" / -->
-    <!--link rel="stylesheet" href="https://unpkg.com/botui/build/botui.min.css" / -->
-    <!--link rel="stylesheet" href="https://unpkg.com/botui/build/botui-theme-default.css" / -->
-    
+    <title>DB検索</title>
     <link rel="stylesheet" type="text/css" href="../../plugin/DataTables/datatables.min.css"/>
 	<script type="text/javascript" language="javascript" src="../../plugin/jquery/jquery-3.6.0.slim.min.js"></script>
 	<script type="text/javascript" language="javascript" src="../../plugin/DataTables/datatables.min.js"></script>
-    
-    
   </head>
-   <body>
+  <body>
+	<table id="example" class="display">
 
-  <p>
-CSV出力をおこないます。<br />
-  <form id="form1" class="form_wrap" action="./download.php" method="POST">
-            <div class="csv_export_textarea">
-                <input type="hidden" name="key" value="runrunrun">
-                <input type="submit" value="csv export">
-            <div>
-</form>
-<hr>
-<p>
-CSVファイルを選択して下さい<br />
-<form action="./upload.php" method="post" enctype="multipart/form-data">
-  CSVファイル：<br />
-  <input type="file" name="csvfile" size="30" /><br />
-  <input type="submit" value="アップロード" />
-</form>
-</p>
-		</form>
-<hr>
-		<p>
-TABLE削除<br />
- <form id="form2" class="form_wrap" action="./deletetable.php" method="POST">
-            <div class="delete_textarea">
-                <input type="hidden" name="key" value="delete">
-                <input type="submit" value="delete table">
-            <div>
-            
-     	<p>
-<hr>
-TABLE一覧<br />
-     	<table id="example" class="display">
 <?php
     // 接続
     try{

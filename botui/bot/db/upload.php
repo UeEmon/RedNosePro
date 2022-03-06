@@ -27,8 +27,6 @@ if (is_uploaded_file($_FILES["csvfile"]["tmp_name"])) {
       //ファイルの削除
       unlink('../../tmp/uploaded/'.$file_name);
       
-      print_r($asins);
-      
       //DB接続情報
     $pdo = new PDO('sqlite:./botdb.db');
 
@@ -39,26 +37,17 @@ if (is_uploaded_file($_FILES["csvfile"]["tmp_name"])) {
     // デフォルトのフェッチモードを連想配列形式に設定 
     // (毎回PDO::FETCH_ASSOCを指定する必要が無くなる)
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);    
-   
-   
-    $arrayValues = "";
-    foreach ($asins as $asin) {
-        $arrayValues[] = "('{$asain}',)";
-    }
-    
-   // print_r($arrayValues);
-    
+       
     //prepareによる実行準備
-    //$sql="INSERT INTO content (0,1,2,3,4) VALUES ;
-    
-    //print_r($sql);
-    $stmt=$pdo->prepare("insert into content values(:asain)");
-    
-    //foreach($asins as $asin){
-    //    $stmt->excute($asin);
-    //}
-    
-    
+    $sql = "INSERT INTO content (value,cat_1,cat_2,question,answer) VALUES (:value,:cat_1,:cat_2,:question,:answer)";    
+    $stmt=$pdo->prepare($sql);
+
+    //配列をDBにインサート
+    foreach($asins as $asin){
+         $stmt->execute($asin);
+    }
+    //dbcontrolに戻る
+    header('Location: ./dbcontrol.php');
       
     } else {
       $err_msg = "ファイルをアップロードできません。";

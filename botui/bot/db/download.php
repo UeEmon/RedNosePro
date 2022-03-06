@@ -30,7 +30,8 @@
      $fileNm = "export.csv";
      header('Content-Type: text/csv');
      header('Content-Disposition: attachment; filename='.$fileNm);
-     echo mb_convert_encoding($csvstr, "SJIS", "UTF-8"); //Shift-JISに変換したい場合のみ
+     echo $csvstr;
+     //echo mb_convert_encoding($csvstr, "SJIS", "UTF-8"); //Shift-JISに変換したい場合のみ
      exit();
 
    }catch(ErrorException $ex){
@@ -38,3 +39,6 @@
    }catch(PDOException $ex){
      print('PDOException:' . $ex->getMessage());
    }
+   
+   //dbcontrolに戻る
+    header('Location: ./dbcontrol.php');
