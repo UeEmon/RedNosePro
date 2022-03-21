@@ -49,24 +49,9 @@ TABLE削除<br />
 TABLE一覧<br />
      	<table id="example" class="display">
 <?php
-    // 接続
-    try{
-    $pdo = new PDO('sqlite:botdb.db');
-    }catch( PDOException $error ){
-    echo "接続失敗:".$error->getMessage();
-    die();
-    }
-    // SQL実行時にもエラーの代わりに例外を投げるように設定
-    // (毎回if文を書く必要がなくなる)
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    // デフォルトのフェッチモードを連想配列形式に設定 
-    // (毎回PDO::FETCH_ASSOCを指定する必要が無くなる)
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-
-
-$sql = "SELECT * FROM content";
-$stmt = $pdo->query( $sql );
+   require_once('./config/config.php');  /* DB接続用のファイルを読み込む */
+   $sql = "SELECT * FROM content";
+   $stmt = $pdo->query( $sql );
 ?>
 <thead>
 <tr><th>id</th><th>カテゴリー１</th><th>カテゴリー２</th><th>質問</th><th>回答</th></tr>

@@ -11,15 +11,23 @@
 	<table id="example" class="display">
 
 <?php
-   require_once('./config/config.php');  /* DB接続用のファイルを読み込む */
-   $sql = "SELECT * FROM content";
-   $stmt = $pdo->query( $sql );
+  require_once  ("./dbconnect.php");
+  
+  //クラスの生成
+  $obj=new connect();
+  
+  $obj->pdo();
+  
+  $sqls = "SELECT * FROM content";
+  
+  $stm=$obj->select($sqls);
+  
 ?>
 <thead>
 <tr><th>id</th><th>カテゴリー１</th><th>カテゴリー２</th><th>質問</th><th>回答</th></tr>
 </thead>
 <?php
-while( $result = $stmt->fetch( PDO::FETCH_ASSOC ) ){
+while( $result = $stm->fetch( PDO::FETCH_ASSOC ) ){
 ?>
     <tr>
     <td><?= $result['value'] ?></td>
@@ -30,6 +38,23 @@ while( $result = $stmt->fetch( PDO::FETCH_ASSOC ) ){
     </tr>
 <?php
 }
+
+
+
+/*
+echo "<table>\n";
+echo "\t<tr><th>id</th><th>カテゴリー１</th><th>カテゴリー２</th><th>質問</th><th>回答</th></tr>\n";
+while( $result = $stmt->fetch( PDO::FETCH_ASSOC ) ){
+    echo "\t<tr>\n";
+    echo "\t\t<td>{$result['value']}</td>\n";
+    echo "\t\t<td>{$result['cat_1']}</td>\n";
+    echo "\t\t<td>{$result['cat_2']}</td>\n";
+    echo "\t\t<td>{$result['question']}</td>\n";
+    echo "\t\t<td>{$result['answer']}</td>\n";
+    echo "\t</tr>\n";
+}
+echo "</table>\n";
+*/
 ?>
 </table>
 
