@@ -31,7 +31,7 @@ if (is_uploaded_file($_FILES["csvfile"]["tmp_name"])) {
      require_once('./config/config.php');  /* DB接続用のファイルを読み込む */
   
     //prepareによる実行準備
-    $sql = "INSERT INTO content (value,cat_1,cat_2,question,answer) VALUES (:value,:cat_1,:cat_2,:question,:answer)";    
+    $sql = 'insert into content (value,cat_1,cat_2,question,answer) VALUES (:value,:cat_1,:cat_2,:question,:answer)';    
     $stmt=$pdo->prepare($sql);
 
     //配列をDBにインサート
