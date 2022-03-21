@@ -27,17 +27,9 @@ if (is_uploaded_file($_FILES["csvfile"]["tmp_name"])) {
       //ファイルの削除
       unlink('../../tmp/uploaded/'.$file_name);
       
-      //DB接続情報
-    $pdo = new PDO('sqlite:./botdb.db');
-
-    // SQL実行時にもエラーの代わりに例外を投げるように設定
-    // (毎回if文を書く必要がなくなる)
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    // デフォルトのフェッチモードを連想配列形式に設定 
-    // (毎回PDO::FETCH_ASSOCを指定する必要が無くなる)
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);    
-       
+     //DB接続情報
+     require_once('./config/config.php');  /* DB接続用のファイルを読み込む */
+  
     //prepareによる実行準備
     $sql = "INSERT INTO content (value,cat_1,cat_2,question,answer) VALUES (:value,:cat_1,:cat_2,:question,:answer)";    
     $stmt=$pdo->prepare($sql);
