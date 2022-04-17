@@ -273,6 +273,14 @@ try {
         });
       }
 
+    //入力
+     botui.action.text({
+         action:{
+             placeholder: '名前を入力してください'
+          }
+        });
+
+
     </script>
 
 

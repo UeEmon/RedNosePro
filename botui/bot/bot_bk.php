@@ -251,13 +251,11 @@ try {
 
       //回答を表示する関数
       function answer(i, category_value, category2_value){
+        //集計用
+          
+          
         //回答に含まれているダブルクォーテーションの削除
-        var answer = ans_array[i].replace(/"/g,'');
-        
-        //アクセス解析のため、AJAXでPHPを経由してDBに登録
-        
-        
-        //回答表示
+        //var answer = ans_array[i].replace(/"/g,'');
         botui.message.add({
           photo: gaPhoto,
           delay: 1000,
@@ -281,7 +279,8 @@ try {
           }
         });
       }
-
+      
+      function 
       
     </script>
 

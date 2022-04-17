@@ -31,31 +31,20 @@ if (is_uploaded_file($_FILES["csvfile"]["tmp_name"])) {
      require_once('./config/config.php');  /* DB接続用のファイルを読み込む */
   
     //prepareによる実行準備
-    $sql = 'insert into content (value,cat_1,cat_2,question,answer) VALUES (:value,:cat_1,:cat_2,:question,:answer)';    
-    //$sql = 'insert into content (cat_1,cat_2,question,answer) VALUES (:cat_1,:cat_2,:question,:answer)';    
-
+    $sql = "INSERT INTO content (value,cat_1,cat_2,question,answer) VALUES (:value,:cat_1,:cat_2,:question,:answer)";    
     $stmt=$pdo->prepare($sql);
 
     //配列をDBにインサート
     foreach($asins as $asin){
          $stmt->execute($asin);
     }
-    
-    //DB接続終了
-    $stmt = null;
-    $pdo = null;
-    
     //dbcontrolに戻る
     header('Location: ./dbcontrol.php');
       
     } else {
       $err_msg = "ファイルをアップロードできません。";
-      //dbcontrolに戻る
-      header('Location: ./dbcontrol.php');
     }
   }
 } else {
   $err_msg = "ファイルが選択されていません。";
-   //dbcontrolに戻る
-   header('Location: ./dbcontrol.php');
 }

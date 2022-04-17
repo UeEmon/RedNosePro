@@ -29,7 +29,7 @@ CSV出力をおこないます。<br />
 <p>
 CSVファイルを選択して下さい<br />
 <form action="./upload.php" method="post" enctype="multipart/form-data">
-  CSVファイル：
+  CSVファイル：<br />
   <input type="file" name="csvfile" size="30" /><br />
   <input type="submit" value="アップロード" />
 </form>
@@ -39,16 +39,14 @@ CSVファイルを選択して下さい<br />
 		<p>
 TABLE削除<br />
  <form id="form2" class="form_wrap" action="./deletetable.php" method="POST">
-            <div class="delete_table_textarea">
+            <div class="delete_textarea">
                 <input type="hidden" name="key" value="delete">
                 <input type="submit" value="delete table">
             <div>
-</form>
+            
      	<p>
 <hr>
 TABLE一覧<br />
- <button formaction="./insert_item.php">新規登録</button>
-
      	<table id="example" class="display">
 <?php
    require_once('./config/config.php');  /* DB接続用のファイルを読み込む */
@@ -56,7 +54,7 @@ TABLE一覧<br />
    $stmt = $pdo->query( $sql );
 ?>
 <thead>
-<tr><th>id</th><th>カテゴリー１</th><th>カテゴリー２</th><th>質問</th><th>回答</th><th>更新</th><th>削除</th></tr>
+<tr><th>id</th><th>カテゴリー１</th><th>カテゴリー２</th><th>質問</th><th>回答</th></tr>
 </thead>
 <?php
 while( $result = $stmt->fetch( PDO::FETCH_ASSOC ) ){
@@ -68,33 +66,32 @@ while( $result = $stmt->fetch( PDO::FETCH_ASSOC ) ){
     <td><?= $result['question'] ?></td>
     <td><?= $result['answer']?></td>
     
-
-    <td>
-   <form action="update_item.php" class="form_wrap" method="POST"  id="form3">
-            <div class="edit_item_textarea">
-                <input type="hidden" name="id" value="<?= $result['value'] ?> ">
-                <input type="submit" value="更　新">
-            <div>
-    </form>
-
-    </td>
-            
-            <td>
-    <form action="delete_item.php" class="form_wrap" method="POST"  id="form4">
-            <div class="delete_item_textarea">
-                <input type="hidden" name="id" value="<?= $result['value'] ?> ">
-                <input type="submit" value="削　除">
-            <div>
-    </form>
-            </td>
-
+    
+    
     </tr>
 <?php
 }
+
     //DB接続終了
     $stmt = null;
     $pdo = null;
-    ?>
+    
+
+/*
+echo "<table>\n";
+echo "\t<tr><th>id</th><th>カテゴリー１</th><th>カテゴリー２</th><th>質問</th><th>回答</th></tr>\n";
+while( $result = $stmt->fetch( PDO::FETCH_ASSOC ) ){
+    echo "\t<tr>\n";
+    echo "\t\t<td>{$result['value']}</td>\n";
+    echo "\t\t<td>{$result['cat_1']}</td>\n";
+    echo "\t\t<td>{$result['cat_2']}</td>\n";
+    echo "\t\t<td>{$result['question']}</td>\n";
+    echo "\t\t<td>{$result['answer']}</td>\n";
+    echo "\t</tr>\n";
+}
+echo "</table>\n";
+*/
+?>
 </table>
 
       </body>
